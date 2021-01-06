@@ -22,17 +22,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private Environment env;
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {					//Liberação de acesso para o DB h2
 		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
 			http.headers().frameOptions().disable();
 		}
 		
-		http.cors().and().csrf().disable();
+		http.cors().and().csrf().disable();					//Liberação do cors e desabilitando a proteção csrf. Aplicação REST, sem dados em sessão.
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests().anyRequest().permitAll();
 	}
 
-	@Bean
+	@Bean			//Desbloqueio dos domínios para acesso do frontend ao backend
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
 		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
