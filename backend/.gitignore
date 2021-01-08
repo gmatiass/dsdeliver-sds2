@@ -34,4 +34,4 @@ build/
 
 ### DB Create ###
 create.sql
-data.sql
+/src/main/resources/data.sql
