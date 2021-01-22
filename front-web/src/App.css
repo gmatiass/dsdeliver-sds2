@@ -18,5 +18,5 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none; /**Remove o sublinhado das tags 'a'**/
 }
