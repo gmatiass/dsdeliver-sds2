@@ -41,8 +41,12 @@ function Orders() {
             ...orderLocation!,
             products: productsIds
         }
-
-        saveOrder(payload)
+        
+        if(payload.address == null){
+            toast.warning('Escolha um endereço.');
+        }
+        else{
+            saveOrder(payload)
             .then((response) => {
                 toast.error(`Pedido número ${response.data.id} enviado com sucesso!`);
                 setSelectedProducts([]);
@@ -50,6 +54,8 @@ function Orders() {
             .catch(() => {
                 toast.warning('Erro ao listar produtos.');
             })
+        }
+        
     }
 
     return (
